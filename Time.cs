@@ -8,9 +8,28 @@ namespace practiceOOP3
 {
     class Time
     {
-        public int Hours { get; set; }
-        public int Minutes { get; set; }
-        public int Seconds { get; set; }
+        private int hours;
+        public int Hours
+        {
+            get { return hours; }
+            set { if (value < 0) hours = 0;
+                  else hours = value; }
+        }
+        private int minutes;
+        public int Minutes 
+        { 
+            get { return minutes; }
+            set { if (value < 0) minutes = 0; 
+                  else minutes = value; }
+        }
+        private int seconds;
+        public int Seconds 
+        { 
+            get { return seconds; }
+            set { if (value < 0) seconds = 1; 
+                  else seconds = value; }
+        }
+        public int AllMinutes => minutes + (hours * 60) + (seconds / 60);
 
         public Time() { }
 
@@ -29,14 +48,15 @@ namespace practiceOOP3
             Seconds = seconds;
         }
 
+
         public string СalculateMinutes()
         {
-            return $"Всего минут = {Minutes + (Hours * 60) + (Seconds / 60)}";
+            return $"Всего минут = {AllMinutes}";
         }
 
         public string MinusTenMinutes()
         {
-            return $"Меньше на 10 минут = {(Minutes + (Hours * 60) + (Seconds / 60)) - 10}";
+            return AllMinutes > 10 ? $"Меньше на 10 минут = {AllMinutes - 10}" : "Невозможно отнять 10 минут";
         }
 
         ~Time()
